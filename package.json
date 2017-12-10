@@ -1,32 +1,37 @@
 {
-  "name": "tweenrex.github.io",
+  "name": "test-template",
   "version": "1.0.0",
-  "description": "TweenRex doc site",
-  "author": "",
+  "description": "Nuxt.js project",
+  "author": "cwallis <cwallis@wilkesmchugh.com>",
   "private": true,
-  "dependencies": {
-    "@nuxtjs/axios": "latest",
-    "nuxt": "^1.0.0-rc11",
-    "nuxtent": "latest"
-  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "clean": "node_modules/.bin/del dist",
+    "copy:monaco": "cp-cli node_modules/monaco-editor/min/vs static/vs",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "postinstall": "npm run copy:monaco",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "nuxt": "^1.0.0-rc11"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
+    "@nuxtjs/markdownit": "^1.2.0",
+    "babel-eslint": "^7.2.3",
     "copy-webpack-plugin": "^4.2.3",
-    "eslint": "^3.15.0",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-html": "^2.0.0",
-    "eslint-plugin-promise": "^3.4.1",
-    "eslint-plugin-standard": "^2.0.1",
+    "cp-cli": "^1.1.0",
+    "del-cli": "^1.1.0",
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.1.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "monaco-editor": "^0.10.1"
   }
 }

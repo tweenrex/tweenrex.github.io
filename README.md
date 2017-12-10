@@ -1,13 +1,10 @@
-# tweenrex.github.io
+# test-template
 
-> TweenRex doc site
+> Nuxt.js project
 
 ## Build Setup
 
 ``` bash
-# enter directory Nuxt source directory
-$ cd site
-
 # install dependencies
 $ npm install # Or yarn install
 
@@ -22,4 +19,4 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout the [nuxt.js](https://github.com/nuxt/nuxt.js) and [nuxt-content](https://github.com/nuxt-community/nuxtent) docs.
+For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).

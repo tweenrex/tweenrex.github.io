@@ -1,83 +1,293 @@
 <template>
-  <div>
-    <a class="site-nav" href="/">
-      <h1 class="site-title"> TweenRex </h1>
-    </a>
+  <div class="center-stage">
     <nuxt/>
   </div>
 </template>
 
+<script>
+import Vue from 'vue'
+import Playground from '../components/Playground'
+
+// register global components
+Vue.component('playground', Playground);
+
+export default { }
+</script>
+
 <style>
-html
-{
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  border: 0;
   box-sizing: border-box;
-}
-*, *:before, *:after
-{
-  box-sizing: border-box;
+  font: inherit;
+  font-size: 1rem;
   margin: 0;
-}
-.button--green
-{
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-.button--green:hover
-{
-  color: #fff;
-  background-color: #3b8070;
-}
-.button--grey
-{
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-.button--grey:hover
-{
-  color: #fff;
-  background-color: #35495e;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  vertical-align: baseline;
 }
 
-.site-nav
-{
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  margin: 2rem 0;
-  text-decoration: none;
-  margin-bottom: 3rem
-}
-
-.site-title
-{
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
   display: block;
-  font-weight: 600;
-  font-size: 3.5rem;
-  color: #35495e;
-  letter-spacing: 1px;
-  margin-left: 1.5rem;
 }
 
-.site-logo
-{
-  width: 200px;
-  height: 200px
+/* global */
+html {
+  font-weight: normal;
+  font-family: 'Merriweather', serif;
+  font-size: 14.4px;
+  line-height: 1.65;
+}
+
+body {
+  background: #fcfcfc;
+  color: #444;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  word-wrap: break-word;
+}
+
+p, header, footer, main {
+  padding: 0.6rem 0.8rem;
+}
+
+/* content */
+small {
+  font-size: 0.65em;
+}
+
+abbr {
+  color: gray;
+  -webkit-font-variant: small-caps;
+  -moz-font-variant: small-caps;
+  -ms-font-variant: small-caps;
+  font-variant: small-caps;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+abbr[title]:hover {
+  cursor: help;
+}
+
+/* hyphenation */
+input,
+abbr,
+acronym,
+blockquote,
+code,
+kbd,
+q,
+samp,
+var {
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  color: #222;
+  line-height: 1;
+  margin-top: 0;
+  padding: 0.6rem 0.8rem;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: 4.02778rem;
+  margin-top: 1.00694rem;
+}
+
+h2 {
+  font-size: 3.33333rem;
+  margin-top: 0.83333rem;
+}
+
+h3 {
+  font-size: 2.63889rem;
+  margin-top: 0.65972rem;
+}
+
+h4 {
+  font-size: 2.01389rem;
+  margin-top: 0.50347rem;
+}
+
+h5 {
+  font-size: 1.31944rem;
+  margin-top: 0.32986rem;
+}
+
+h6 {
+  font-size: 1.18056rem;
+  margin-top: 0.29514rem;
+}
+
+svg, img, video, audio, iframe, canvas {
+  max-width: 100%;
+  max-width: calc(100% - 1.6rem);
+  width: 100%;
+  margin: 0.6rem 0.8rem;
+}
+
+figure > figcaption {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  max-width: 100%;
+  table-layout: fixed;
+  width: 100%;
+  max-width: calc(100% - (1.6rem));
+}
+
+table, tbody, tfoot, thead {
+  margin: 0.6rem 0.8rem;
+}
+
+table > caption {
+  padding: 0.6rem 0.8rem;
+}
+
+th, td {
+  padding: 0.3rem 0.4rem;
+}
+
+thead th, thead td, tfoot th, tfoot td {
+  padding: 0.6rem 0.4rem;
+  text-align: left;
+}
+
+thead th, thead td {
+  font-weight: bold;
+}
+
+dl {
+  padding: 0.6rem 0.8rem;
+}
+
+ol, ul, dl {
+  margin: 1rem 0;
+}
+
+li {
+  padding: 0.3rem 0;
+}
+
+blockquote {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-left: 1.6rem;
+}
+
+blockquote > cite {
+  align-self: flex-end;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+blockquote + figcaption cite,
+q + figcaption cite {
+  display: block;
+  font-size: inherit;
+  text-align: right;
+}
+
+cite {
+  padding: 0.6rem 0.8rem;
+}
+
+button,
+input,
+label,
+meter,
+progress,
+select,
+textarea {
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.3rem 0.4rem;
+  padding: 0.3rem 0.4rem;
+  vertical-align: middle;
+}
+
+textarea {
+  vertical-align: top;
+}
+
+input {
+  border: solid thin #929292;
+  background-color: #ffffff;
+}
+
+button {
+  border: solid thin #929292;
+  background-color: #eeeeee;
+}
+
+fieldset {
+  background: #fcfcfc;
+  border: solid thin #c5c5c5;
+  margin: 0.6rem 0.8rem;
+  padding: 0.6rem 0.8rem;
+}
+
+fieldset > legend {
+  padding: 0.6rem 0.8rem;
+}
+
+fieldset > legend:empty {
+  padding: 0;
+}
+
+code {
+  font-family: monospace;
+  white-space: pre;
+}
+
+pre {
+  padding: 0.6rem 0.8rem;
+  white-space: pre;
+}
+
+pre > code {
+  word-wrap: normal;
+  white-space: pre-wrap;
+}
+.center-stage {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
 }
 </style>
