@@ -235,8 +235,11 @@ input {
 }
 
 button {
-  border: solid thin #929292;
-  background-color: #eeeeee;
+  border: solid thin black;
+  background-color: #222;
+  cursor: pointer;
+  color: white;
+  padding: 0.6rem 1.2rem;
 }
 
 fieldset {

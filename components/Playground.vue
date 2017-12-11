@@ -1,11 +1,17 @@
 <template>
     <div class="playground">
-        <div class="toolbar-panes">
-            <button @click="onRun()">Run</button>
-        </div>
         <div class="editor-panes">
-            <div ref="editor" class="editor-container"></div>
+            <div ref="raw" v-show="!isLoaded">
+                <slot name="js"></slot>
+                <slot name="html"></slot>
+            </div>
+            <div class="editor-container">
+                <div v-show="isLoaded" ref="jsEditor" class="editor"></div>
+            </div>
             <div class="frame-container">
+                <div class="toolbar-panes">
+                    <button @click="onRun()">Reload</button>
+                </div>
                 <iframe ref="frame"></iframe>
             </div>
         </div>
@@ -17,8 +23,9 @@ const component = {
     data() {
         return {
             content: 'Some content',
-            editor: undefined,
+            selectedTab: 'js',
             html: '',
+            jsEditor: undefined,
             isLoaded: false
         }
     },
@@ -32,23 +39,30 @@ const component = {
         const self = this
 
         if (process.browser) {
-            const editorEl = self.$refs.editor;
-            const defaultSlots = self.$slots.default
-            self.html = ((defaultSlots.length && defaultSlots[0].text) || '').trim();
+            const jsEditor = self.$refs.jsEditor;
+
+            const js = (self.$slots.js || [])
+                .reduce((c, n) => c + n.elm.textContent, '')
+                .trim() || 'var t1 = TweenRex({});'
+
+            this.html = (self.$slots.html || [])
+                .reduce((c, n) => c + n.elm.textContent, '')
+                .trim() || '<img class="wrex" width="200" height="200" src="images/wrex.png" />';
+
+            self.isLoaded = true
 
             window.onMonacoLoad(function(monaco) {
-                self.isLoaded = true
-
-                self.editor = monaco.editor.create(editorEl, {
-                    value: self.html,
+                self.jsEditor = monaco.editor.create(jsEditor, {
+                    value: js,
                     language: 'javascript',
-                    lineNumbers: true,
+                    lineNumbers: false,
                     roundedSelection: false,
-                    scrollBeyondLastLine: false,
+                    scrollBeyondLastLine: true,
                     readOnly: false,
                     theme: 'vs-dark'
                 })
-                self.editor.layout();
+
+                self.onResize();
                 self.onRun();
             })
         }
@@ -61,32 +75,28 @@ const component = {
     methods: {
         onResize() {
             const self = this
-            if (self.editor) {
-                self.editor.layout()
+            if (self.jsEditor) {
+                self.jsEditor.layout()
             }
         },
         onRun() {
             const self = this
 
-            const head = [
-                createStyle('base.css')
-            ]
-
-            const body = '<h3 class="target">Target</h3>';
-
-            const scripts = [
+            const html = createHTML([
+                createStyle('base.css'),
                 createScript('https://unpkg.com/tweenrex/dist/tweenrex-all.min.js'),
-                createScript(insertContent(body), true),
-                createScript(self.html, true)
-            ]
+                createScript(insertContent(self.html), true),
+                createScript(self.jsEditor.getValue(), true)
+            ])
 
-            const html = createHTML(head, scripts)  
-
-            const frame = self.$refs.frame 
+            const frame = self.$refs.frame
             const doc = frame.contentWindow.document
             doc.open();
             doc.write(html);
             doc.close();
+        },
+        onSelectTab(tab) {
+            this.selectedTab = tab
         }
     }
 }
@@ -97,7 +107,7 @@ function createStyle(href) {
 
 function insertContent(contents) {
     return `var el = document.createElement('div');`
-        + `el.innerHTML = '${contents}';`
+        + `el.innerHTML = '` + contents + `';`
         + `document.body.appendChild(el);`
 }
 
@@ -113,10 +123,10 @@ function createScript(srcOrContents, contents) {
         + '</sc' + 'ript>'
 }
 
-function createHTML(head, js) {
+function createHTML(contents) {
     return `
 <html>
-<head>${head.join('')}${js.join('')}</head>
+<head>${contents.join('')}</head>
 <body class="example"></body>
 </html>
 `
@@ -126,34 +136,48 @@ export default component
 </script>
 
 <style scoped>
-.playground {
+.playground {}
 
-}
 .toolbar-panes {
-
+    position: absolute;
+    z-index: 9000;
+    right: 0;
+    top: 0;
 }
+
 .editor-panes {
     max-width: 900px;
     height: 280px;
     position: relative;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .editor-container {
-    width: 50%;
-    height: 280px;
+    width: 320px;
+    flex: 1 1 auto;
     border: 1px solid grey;
+    min-width: 320px;
+    overflow: hidden;
+}
+
+.editor {
+    height: 280px;
+    width: 100%;
 }
 
 .frame-container {
-    width: 50%;
+    width: 320px;
+    flex: 1 1 auto;
     height: 280px;
+    min-width: 320px;
     overflow: hidden;
+    position: relative;
 }
 
 .frame-container {
     height: 100%;
-    border: dashed thin black;
+    border: 1px solid grey;
 }
 
 .frame-container>iframe {

@@ -1,6 +1,6 @@
 <template>
   <div class="center-stage">
-    <nuxt/>
+    <nuxt/> 
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import Playground from '../components/Playground'
 // register global components
 Vue.component('playground', Playground);
 
-export default { }
+export default {}
 </script>
 
 <style lang="scss">
@@ -20,6 +20,6 @@ export default { }
 .center-stage {
   margin-left: auto;
   margin-right: auto;
-  max-width: 900px; 
-}
+  max-width: 900px;
+} 
 </style>

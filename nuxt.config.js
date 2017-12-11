@@ -39,7 +39,9 @@ config.modules = ["@nuxtjs/markdownit"];
 config.markdownit = {
   preset: "default",
   linkify: true,
-  breaks: true,
+  breaks: false,
+  html: true,
+  xhtmlOut: true,
   langPrefix: 'v-code-'
 };
 
