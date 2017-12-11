@@ -13,6 +13,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "postinstall": "npm run copy:monaco",
+    "publish": "npm run clean && npm run generate && ./scripts/publish.ts",
     "start": "nuxt start"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "ghpages": "0.0.10",
     "monaco-editor": "^0.10.1",
     "node-sass": "^4.7.2",
     "raw-loader": "^0.5.1",
