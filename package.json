@@ -1,9 +1,8 @@
 {
-  "name": "test-template",
+  "name": "tweenrex.github.io",
   "version": "1.0.0",
-  "description": "Nuxt.js project",
-  "author": "cwallis <cwallis@wilkesmchugh.com>",
-  "private": true,
+  "description": "TweenRex Docs",
+  "author": "Wrex", 
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -13,7 +12,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "postinstall": "npm run copy:monaco",
-    "publish": "npm run clean && npm run generate && node ./scripts/publish.js",
+    "publish": "npm run generate && node ./scripts/publish.js",
     "start": "nuxt start"
   },
   "dependencies": {
