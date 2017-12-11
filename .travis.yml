@@ -1,8 +1,11 @@
 language: node_js
 node_js:
-- '6'
-script: 
-- npm run publish
+- '8'
+script: bash ./deploy.sh
+env:
+  global:
+  - ENCRYPTION_LABEL: "eb74e0816811"
+  - COMMIT_AUTHOR_EMAIL: "christopher.j.wallis@gmail.com"
 branches:
   only:
   - source
