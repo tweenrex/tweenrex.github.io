@@ -9,10 +9,8 @@
     "clean": "node_modules/.bin/del dist",
     "copy:monaco": "cp-cli node_modules/monaco-editor/min/vs static/vs",
     "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint",
-    "postinstall": "npm run copy:monaco",
-    "publish": "npm run generate && node ./scripts/publish.js",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .", 
+    "postinstall": "npm run copy:monaco", 
     "start": "nuxt start"
   },
   "dependencies": {
