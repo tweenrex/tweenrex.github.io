@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "TweenRex Docs",
   "author": "Wrex",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tweenrex/tweenrex.github.io"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -13,6 +18,9 @@
     "postinstall": "npm run copy:monaco && npm run generate",
     "start": "nuxt start"
   },
+  "pre-commit": [
+    "clean"
+  ],
   "dependencies": {
     "nuxt": "^1.0.0-rc11"
   },
@@ -33,6 +41,7 @@
     "ghpages": "0.0.10",
     "monaco-editor": "^0.10.1",
     "node-sass": "^4.7.2",
+    "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6"
   }

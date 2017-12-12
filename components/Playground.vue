@@ -83,7 +83,7 @@ const component = {
             const self = this
 
             const html = createHTML([
-                createStyle('base.css'),
+                createStyle('/base.css'),
                 createScript('https://unpkg.com/tweenrex/dist/tweenrex-all.min.js'),
                 createScript(insertContent(self.html), true),
                 createScript(self.jsEditor.getValue(), true)
