@@ -1,11 +1,15 @@
 language: node_js
 node_js:
 - '8'
-script: bash ./deploy.sh
-env:
-  global:
-  - ENCRYPTION_LABEL: "eb74e0816811"
-  - COMMIT_AUTHOR_EMAIL: "christopher.j.wallis@gmail.com"
 branches:
   only:
   - source
+deploy:
+  provider: pages
+  name: notoriousb1t
+  email: christopher.j.wallis@gmail.com
+  target_branch: master
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: source
