@@ -22,7 +22,6 @@ const t1 = TyrannoScrollus({
     }
 })
 
-
 // start listening
 t1.play()
 ```
