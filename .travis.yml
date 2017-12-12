@@ -10,6 +10,9 @@ deploy:
   email: christopher.j.wallis@gmail.com
   target_branch: master
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  github_token: "$GITHUB_TOKEN"
   on:
     branch: source
+env:
+  global:
+    secure: CJ8HvNWWovki9FSp7p5BKXmD2BMui6oB+fITNc3XDuGqppIPboUmXO4t2wUFWL1rD84QhoAYEod+pf0uWUKjwFC6pz8kLehjq8kbvjCtXchdsrLkw0DUtKHlqmeZB74yTBfPoIe8gZXQfvH3jDZQZbqROLUjqrcMherV/uk1hYlI5Rsj5o9o63E5YEPGPQpXxNKLcNGiflNuGWNNMciUhbwUvNtooXsxZr/cEjloWT/LRPqXDDL+wWTdL77LZit9CI5atD703o8VKRayoRkl43zCvO8M+iDWA/+nQVx9Qw4QyrqOSMSABfjmxOgYBQ4Fq53A7QB4n6bvMGLTOSM8L3Cgw9jORyDQzNc55kI3KZDwNaCZE0mMsR+/SXyGYhQtSN53w+H0cSthjj6dZnaaWEhXlNi3qbujCwLu5TFqmKHhcouug7kkhe+B8aUVTFClNkWmVEGXLfkGS+WpzX89gUYCJms40wariVcNBeIE5yImzWGyPYoiO0NsfpGyjM7AXl/b377ezur5jxAbzi7JqZ8bvtJkfL9/zzxNkxGB2wyozvKODH+2L50gcsQsffJLSYqpZrSY4Kk+DkAZIbFtDyTanH0V0YHhsDzoODyOBOTWbbIpBOE86aNGK2e4Dn3YhA7tgkxHUvcF+6REpA163dgMB4s882dqxOyA1OPjBWs=

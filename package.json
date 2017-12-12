@@ -2,15 +2,15 @@
   "name": "tweenrex.github.io",
   "version": "1.0.0",
   "description": "TweenRex Docs",
-  "author": "Wrex", 
+  "author": "Wrex",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "clean": "node_modules/.bin/del dist",
     "copy:monaco": "cp-cli node_modules/monaco-editor/min/vs static/vs",
     "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .", 
-    "postinstall": "npm run copy:monaco", 
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "postinstall": "npm run copy:monaco",
     "start": "nuxt start"
   },
   "dependencies": {
