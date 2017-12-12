@@ -94,9 +94,6 @@ const component = {
             doc.open();
             doc.write(html);
             doc.close();
-        },
-        onSelectTab(tab) {
-            this.selectedTab = tab
         }
     }
 }
