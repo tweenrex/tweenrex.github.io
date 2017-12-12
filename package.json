@@ -10,7 +10,7 @@
     "copy:monaco": "cp-cli node_modules/monaco-editor/min/vs static/vs",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "postinstall": "npm run copy:monaco",
+    "postinstall": "npm run copy:monaco && npm run generate",
     "start": "nuxt start"
   },
   "dependencies": {
