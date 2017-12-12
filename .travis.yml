@@ -10,6 +10,6 @@ deploy:
   email: christopher.j.wallis@gmail.com
   target_branch: master
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  github_token: $GITHUB_TOKEN
   on:
     branch: source
