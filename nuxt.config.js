@@ -37,7 +37,7 @@ config.head = {
         {
             rel: 'stylesheet',
             type: 'text/css',
-            href: 'https://fonts.googleapis.com/css?family=Merriweather|Oswald:300'
+            href: 'https://fonts.googleapis.com/css?family=Oswald:300|Oxygen'
         }
     ],
     script: [{ src: '/vs/loader.js' }]
