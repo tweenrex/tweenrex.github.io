@@ -1,21 +1,24 @@
 <template>
-    <div class="playground">
-        <div class="editor-panes">
-            <div ref="raw" v-show="!isLoaded">
-                <slot name="js"></slot>
-                <slot name="html"></slot>
-            </div>
-            <div class="editor-container">
-                <div v-show="isLoaded" ref="jsEditor" class="editor"></div>
-            </div>
-            <div class="frame-container">
-                <div class="toolbar-panes">
-                    <button @click="onRun()">Reload</button>
+<div>
+    <div data-id="playground" v-show="isShowing" class="modal">
+        <div class="modal-content">
+            <div class="playground">
+                <div class="editor-panes">
+                    <div class="editor-container">
+                        <div v-show="isLoaded" ref="jsEditor" class="editor"></div>
+                    </div>
+                    <div class="frame-container">
+                        <div class="toolbar-panes">
+                            <button @click="onRun()">Reload</button>
+                        </div>
+                        <iframe ref="frame"></iframe>
+                    </div>
                 </div>
-                <iframe ref="frame"></iframe>
             </div>
         </div>
+        <div class="modal-backdrop"></div>
     </div>
+</div>
 </template>
 
 <script>
@@ -25,12 +28,14 @@ const component = {
             content: 'Some content',
             selectedTab: 'js',
             html: '',
+            js: '',
             jsEditor: undefined,
-            isLoaded: false
+            isLoaded: false,
+            isShowing: false
         }
     },
     created() {
-        const self = this;
+        const self = this
         if (process.browser) {
             window.addEventListener('resize', self.onResize)
         }
@@ -39,21 +44,14 @@ const component = {
         const self = this
 
         if (process.browser) {
-            const jsEditor = self.$refs.jsEditor;
-
-            const js = (self.$slots.js || [])
-                .reduce((c, n) => c + n.elm.textContent, '')
-                .trim() || 'var t1 = TweenRex({});'
-
-            this.html = (self.$slots.html || [])
-                .reduce((c, n) => c + n.elm.textContent, '')
-                .trim() || '<img class="wrex" width="200" height="200" src="images/wrex.png" />';
-
+            const jsEditor = self.$refs.jsEditor
+            self.js = 'var t1 = TweenRex({});'
+            self.html = '<img class="wrex" width="200" height="200" src="images/wrex.png" />'
             self.isLoaded = true
 
             window.onMonacoLoad(function(monaco) {
                 self.jsEditor = monaco.editor.create(jsEditor, {
-                    value: js,
+                    value: self.js,
                     language: 'javascript',
                     lineNumbers: false,
                     roundedSelection: false,
@@ -62,8 +60,8 @@ const component = {
                     theme: 'vs-dark'
                 })
 
-                self.onResize();
-                self.onRun();
+                self.onResize()
+                self.onRun()
             })
         }
     },
@@ -83,7 +81,7 @@ const component = {
             const self = this
 
             const html = createHTML([
-                createStyle('/base.css'),
+                createStyle('/example.css'),
                 createScript('https://unpkg.com/tweenrex/dist/tweenrex-all.min.js'),
                 createScript(insertContent(self.html), true),
                 createScript(self.jsEditor.getValue(), true)
@@ -91,9 +89,9 @@ const component = {
 
             const frame = self.$refs.frame
             const doc = frame.contentWindow.document
-            doc.open();
-            doc.write(html);
-            doc.close();
+            doc.open()
+            doc.write(html)
+            doc.close()
         }
     }
 }
@@ -103,9 +101,13 @@ function createStyle(href) {
 }
 
 function insertContent(contents) {
-    return `var el = document.createElement('div');`
-        + `el.innerHTML = '` + contents + `';`
-        + `document.body.appendChild(el);`
+    return (
+        `var el = document.createElement('div');` +
+        `el.innerHTML = '` +
+        contents +
+        `';` +
+        `document.body.appendChild(el);`
+    )
 }
 
 function onLoad(script) {
@@ -113,11 +115,14 @@ function onLoad(script) {
 }
 
 function createScript(srcOrContents, contents) {
-    return '<script'
-        + (contents ? '' : ' src="' + srcOrContents + '"')
-        + '>'
-        + (contents ? onLoad(srcOrContents) : '')
-        + '</sc' + 'ript>'
+    return (
+        '<script' +
+        (contents ? '' : ' src="' + srcOrContents + '"') +
+        '>' +
+        (contents ? onLoad(srcOrContents) : '') +
+        '</sc' +
+        'ript>'
+    )
 }
 
 function createHTML(contents) {
@@ -133,7 +138,8 @@ export default component
 </script>
 
 <style scoped>
-.playground {}
+.playground {
+}
 
 .toolbar-panes {
     position: absolute;
@@ -177,12 +183,38 @@ export default component
     border: 1px solid grey;
 }
 
-.frame-container>iframe {
+.frame-container > iframe {
     height: 100%;
     width: 100%;
 }
 
 .placeholder {
     white-space: pre-wrap;
+}
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+.modal-backdrop {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: hsla(0, 0, 0.2, 0.4);
+    z-index: 8999;
+}
+.modal-content {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 9000;
+    background-color: white;
+    max-width: 900px;
+    min-width: 320px;
+    width: 100%;
 }
 </style>

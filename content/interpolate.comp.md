@@ -1,10 +1,11 @@
-<template lang="md">
-
 # interpolate()
+
 A helper function that makes interpolating between two or more values simple.  It is built to work seamlessly with [TyrannoScrollus](./TyrannoScrollus.md)  and [TweenRex](./TweenRex.md) .
 
 ## Getting Started
+
 Install the ```@tweenrex/render``` package and import the ```interpolate``` function.
+
 ```js
 import { interpolate } from '@tweenrex/render'
 ```
@@ -53,7 +54,6 @@ const timer = TweenRex({
 timer.play()
 ```
 
-
 In the example, ```myObject``` is the target of the tween.  ```The timeElapsed``` property is interpolated from ```0``` to ```60``` in 60 seconds.  Because ```timeElapsed``` is an array of values, ```interpolate``` will use the first value as the starting value and the second value in the array as the ending value.
 
 ### Slide In With a Text Change
@@ -88,6 +88,7 @@ In this example, ```#target``` slides in from the left by interpolating the ```t
 >NOTE: A special interpolate function for SVG/HTML ```transform``` is planned to be built because combining rotate, translate, skew, etc. in a straightforward manner requires special logic outside of the scope of what ```interpolate``` is designed to do.
 
 ## Options
+
 Name | Type | Description |
 --- | --- | --- |
 targets | string, {}, [] | Target(s) of the animation.  This can be an object of any type or an array of various objects. If a string is supplied, it will be used as a DOM selector and the resolved Elements will become the targets of the tween. |
@@ -104,5 +105,3 @@ easing | (offset): number | An optional easing function to be applied to this pr
 type| string | An optional interpolation type.  This option enforces one of three types: ```number```, ```discrete```, ```terms```. Number provides continuous values between numbers.  Discrete switches at the midpoint between values.  Terms splits the tring into an array of number and discrete values and interpolates between them.  Both sides must be structurally compatible when terms is used.  For instance, HSL colors must be interpolated to HSL colors and point arrays must have the same number of terms on both sides. This is an advanced feature.|
 format| (value): any | This function overrides the format function that transforms the property's mixed value into what is assigned to the target.  For instance, translating 5 to 5px. This is an advanced feature. |
 mix | (a, b, offset): any | This function overrides the mix function that interpolates between value a and b at the given offset.  This is an advanced feature.  |
-
-</template>

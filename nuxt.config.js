@@ -54,10 +54,13 @@ config.markdownit = {
 }
 
 // configure nuxt modules
-config.modules = ['@nuxtjs/markdownit']
+config.modules = ['nuxtent']
 
 // configure ./plugin scripts
-config.plugins = ['~/plugins/monaco-configure.js']
+config.plugins = [
+    '~/plugins/monaco-configure.js',
+    '~/plugins/highlighter.js'
+]
 
 // configure router
 config.router = {

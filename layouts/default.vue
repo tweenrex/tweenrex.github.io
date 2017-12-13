@@ -7,11 +7,13 @@
               </a>
           </div>
           <ul>
-              <li><a href="/examples">Examples</a></li>
-              <li><a href="/core/observasaurus">TRexObservable</a></li>
-              <li><a href="/core/tweenrex">TweenRex</a></li>
-              <li><a href="/core/tyrannoscrollus">TyrannoScrollus</a></li>
-              <li><a href="/render/interpolate">interpolate</a></li>
+              <li><a href="/observasaurus">TRexObservable</a></li>
+              <li><a href="/tweenrex">TweenRex</a></li>
+              <li><a href="/tyrannoscrollus">TyrannoScrollus</a></li>
+              <li class="divider"></li>
+              <li><a href="/interpolate">interpolate()</a></li>
+              <li class="divider"></li>
+              <li><a href="/examples">examples</a></li>
           </ul>
       </div>
     <div class="content">
@@ -19,6 +21,7 @@
             <nuxt/>
        </div>
     </div>
+    <playground></playground>
   </div>
 </template>
 
@@ -26,19 +29,17 @@
 import Vue from 'vue'
 import Playground from '../components/Playground'
 
-// register global components
-Vue.component('playground', Playground)
-
-export default {}
+export default {
+    components: {
+        playground: Playground
+    }
+}
 </script>
-
 <style lang="scss">
 @import 'static/base.css';
-body {
-}
-html {
-    height: 100%;
-}
+</style>
+
+<style lang="scss" scoped>
 .app {
     max-width: 900px;
 }
@@ -61,6 +62,7 @@ html {
     flex-basis: 200px;
     flex-grow: 0;
     flex-shrink: 0;
+    font-family: 'Oswald', sans-serif;
     margin: 0;
     width: 200px;
 }
@@ -70,8 +72,20 @@ html {
     list-style-image: none;
     list-style-type: none;
 }
-.nav > ul > li {
+.nav li {
     padding: 0.6rem 0.8rem;
+}
+.nav a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #222;
+}
+
+.nav .divider {
+    padding: 0 1.5rem !important;
+    margin: 0 !important;
+    border-bottom: thin solid lightgray;
+    width: 100px;
 }
 .page {
     align-content: stretch;
