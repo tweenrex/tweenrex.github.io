@@ -109,6 +109,12 @@ html {
     height: 100%;
     line-height: 1.65;
 }
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 13.5px;
+    }
+}
+
 body {
     background: #fcfcfc;
     color: #444;
@@ -206,6 +212,38 @@ h6 {
     margin-top: 0.29514rem;
 }
 
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 3.8rem;
+        margin-top: 1rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+        margin-top: 0.8rem;
+    }
+
+    h3 {
+        font-size: 2.5rem;
+        margin-top: 0.6rem;
+    }
+
+    h4 {
+        font-size: 2rem;
+        margin-top: 0.5rem;
+    }
+
+    h5 {
+        font-size: 1.5rem;
+        margin-top: 0.3rem;
+    }
+
+    h6 {
+        font-size: 1.1rem;
+        margin-top: 0.2rem;
+    }
+}
+
 svg,
 img,
 video,
@@ -269,6 +307,7 @@ tr > td {
     border-bottom: solid thin gray;
     padding: 0.6rem 1.2rem;
     vertical-align: middle;
+    min-width: 125px;
 }
 tbody > tr > td:first-child {
     border-left: solid thin lightgray;
@@ -395,6 +434,12 @@ pre > code {
     margin-bottom: 0.6rem;
     position: relative;
 }
+@media screen and (max-width: 600px) {
+    .code-block {
+        overflow: scroll;
+    }
+}
+
 .code-launcher {
     position: absolute;
     top: 0;
@@ -405,8 +450,13 @@ pre > code {
     transition: transform 250ms;
     cursor: pointer;
 }
+@media screen and (max-width: 600px) {
+    .code-launcher {
+        display: none;
+    }
+}
 .code-launcher:hover {
-    transform: scale(1.15)
+    transform: scale(1.15);
 }
 .code-launcher > svg {
     width: 24px;

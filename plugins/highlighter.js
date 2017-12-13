@@ -8,7 +8,7 @@ const codeSvg =
 
 Vue.mixin({
     mounted() {
-        const els = Array.prototype.slice.call(this.$el.querySelectorAll('pre > code'))
+        const els = Array.prototype.slice.call(this.$el.querySelectorAll('pre.code-block > code'))
 
         if (process.browser) {
             window.onMonacoLoad(monaco => {
@@ -17,9 +17,9 @@ Vue.mixin({
                         ? 'javascript'
                         : el.classList.contains('language-html')
                           ? 'html'
-                            : el.classList.contains('language-css') ? 'css' : 'html'
+                          : el.classList.contains('language-css') ? 'css' : 'html'
 
-                    const code = el.textContent;
+                    const code = el.textContent
 
                     // initial colorized element
                     monaco.editor.colorizeElement(el, {
@@ -28,34 +28,38 @@ Vue.mixin({
 
                     // add playground launcher
                     if (language === 'javascript') {
-                        // remove class from <pre />
                         const parentElement = el.parentElement
-                        parentElement.classList.remove('code-block')
+                        if (parentElement.classList.contains('code-block')) {
+                            // remove class from <pre />
+                            parentElement.classList.remove('code-block')
 
-                        // create new wrapper (relative parent)
-                        const newParent = document.createElement('div')
-                        newParent.classList.add('code-block')
+                            // create new wrapper (relative parent)
+                            const newParent = document.createElement('div')
+                            newParent.classList.add('code-block')
 
-                        // wrap new parent around <pre />
-                        parentElement.parentElement.insertBefore(newParent, parentElement)
-                        newParent.appendChild(parentElement)
+                            // wrap new parent around <pre />
+                            parentElement.parentElement.insertBefore(newParent, parentElement)
+                            newParent.appendChild(parentElement)
 
-                        // create launcher icon
-                        const launcher = document.createElement('div')
-                        launcher.classList.add('code-launcher')
-                        launcher.innerHTML = codeSvg
+                            // create launcher icon
+                            const launcher = document.createElement('div')
+                            launcher.classList.add('code-launcher')
+                            launcher.innerHTML = codeSvg
 
-                        // add launcher icon
-                        parentElement.appendChild(launcher)
+                            // add launcher icon
+                            parentElement.appendChild(launcher)
 
-                        launcher.addEventListener('click', () => {
-                            const codeEditor = document.querySelector('[data-id="playground"]');
-                            if (codeEditor && codeEditor.__vue__) {
-                                const v = codeEditor.__vue__;
-                                v.$data.js = code;
-                                v.$data.isShowing = true;
-                            }
-                        })
+                            launcher.addEventListener('click', () => {
+                                // hack to go from outside of vue and attach new data to an existing vue instance
+                                const codeEditor = document.querySelector('[data-id="playground"]')
+                                if (codeEditor && codeEditor.__vue__) {
+                                    const v = codeEditor.__vue__
+                                    v.$data.js = code
+                                    v.$data.isShowing = true
+                                    v.$forceUpdate()
+                                }
+                            })
+                        }
                     }
                 })
             })
