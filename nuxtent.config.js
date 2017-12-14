@@ -12,7 +12,7 @@ module.exports = {
     parsers: {
         md: {
             highlight: (code, lang) => {
-                return '<pre class="code-block"><code class="language-' + lang + ' ">' + code.trim() + '</code></pre>';
+                return '<pre class="code-block"><code class="language-' + lang.split(':').join(' ') + ' ">' + code.trim() + '</code></pre>';
             }
         }
     }

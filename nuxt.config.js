@@ -40,7 +40,7 @@ config.head = {
             href: 'https://fonts.googleapis.com/css?family=Oswald:300|Oxygen'
         }
     ],
-    script: [{ src: '/vs/loader.js' }]
+    script: [{ src: '/vs/loader.js', async: true }]
 }
 
 // configure markdown-it plugin
@@ -57,10 +57,7 @@ config.markdownit = {
 config.modules = ['nuxtent']
 
 // configure ./plugin scripts
-config.plugins = [
-    '~/plugins/monaco-configure.js',
-    '~/plugins/highlighter.js'
-]
+config.plugins = ['~/plugins/monaco-configure.js', '~/plugins/highlighter.js']
 
 // configure router
 config.router = {

@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import { debug } from 'util'
 
-const codeSvg =
-    '<svg xmlns="http://www.w3.org/2000/svg">' +
-    '<path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/>' +
-    '</svg>'
+const codeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 17v-10l9 5.146-9 4.854z"/></svg>`
 
 Vue.mixin({
     mounted() {
@@ -13,11 +10,16 @@ Vue.mixin({
         if (process.browser) {
             window.onMonacoLoad(monaco => {
                 els.forEach(el => {
-                    const language = el.classList.contains('language-js')
-                        ? 'javascript'
-                        : el.classList.contains('language-html')
-                          ? 'html'
-                          : el.classList.contains('language-css') ? 'css' : 'html'
+                    const isPlayground = el.classList.contains('language-javascript')
+
+                    const language =
+                        isPlayground || el.classList.contains('language-js')
+                            ? 'javascript'
+                            : el.classList.contains('language-html')
+                              ? 'html'
+                              : el.classList.contains('language-css') ? 'css' : 'html'
+
+                    const templateName = el.classList.contains('text') ? 'text' : 'image'
 
                     const code = el.textContent
 
@@ -27,7 +29,7 @@ Vue.mixin({
                     })
 
                     // add playground launcher
-                    if (language === 'javascript') {
+                    if (isPlayground) {
                         const parentElement = el.parentElement
                         if (parentElement.classList.contains('code-block')) {
                             // remove class from <pre />
@@ -50,14 +52,14 @@ Vue.mixin({
                             parentElement.appendChild(launcher)
 
                             launcher.addEventListener('click', () => {
-                                // hack to go from outside of vue and attach new data to an existing vue instance
-                                const codeEditor = document.querySelector('[data-id="playground"]')
-                                if (codeEditor && codeEditor.__vue__) {
-                                    const v = codeEditor.__vue__
-                                    v.$data.js = code
-                                    v.$data.isShowing = true
-                                    v.$forceUpdate()
-                                }
+                                window.dispatchEvent(
+                                    new CustomEvent('edit-code', {
+                                        detail: {
+                                            js: code,
+                                            templateName: templateName
+                                        }
+                                    })
+                                )
                             })
                         }
                     }

@@ -14,16 +14,12 @@ import { interpolate } from '@tweenrex/render'
 
 ### A Simple Fade Out
 
-```js
-import { TweenRex } from '@tweenrex/core'
-import { interpolate } from '@tweenrex/render'
-import { easeOut } from 'just-curves' // external easing library
-
+```javascript
 const tween = TweenRex({
     duration: 1000,
-    easing: easeOut,
-    subscribe: interpolate({
-        targets: '#target',
+    easing: just.curves.easeOut,
+    subscribe: tweenrex.interpolate({
+        targets: '.wrex',
         opacity: 0
     })
 })
@@ -58,22 +54,14 @@ In the example, ```myObject``` is the target of the tween.  ```The timeElapsed``
 
 ### Slide In With a Text Change
 
-```js
-import { TweenRex } from '@tweenrex/core'
-import { interpolate } from '@tweenrex/render'
-import { easeIn } from 'just-curves' // external easing library
-
+```javascript
 const tween = TweenRex({
     duration: 1000,
-    subscribe: interpolate({
-        targets: '#target',
+    subscribe: tweenrex.interpolate({
+        targets: '.wrex',
         transform: {
             value: ['translateX(-200px)', 'translateX(0px)'],
-            easing: easeIn
-        },
-        innerHTML: {
-            value: ['First Half', 'Second Half'],
-            type: 'discrete'
+            easing: just.curves.easeIn
         }
     })
 })
@@ -81,7 +69,7 @@ const tween = TweenRex({
 tween.play()
 ```
 
-In this example, ```#target``` slides in from the left by interpolating the ```transform``` property from ```translateX(-200px)``` to ```translateX(0px)```.  ```interpolate``` automatically detects the structure of the values and interpolates between them.  In order to switch the text of ```innerHTML``` from 'First Half' to 'Second Half', the ```type``` property is used to inform ```interpolate``` that the values provided are discrete values that swap midway rather than continous values like numbers and colors.
+In this example, ```#target``` slides in from the left by interpolating the ```transform``` property from ```translateX(-200px)``` to ```translateX(0px)```.  ```interpolate``` automatically detects the structure of the values and interpolates between them.
 
 > NOTE: ```interpolate``` requires all values to be structurally similar.  That is, all values must be formatted the same with the same units. i.e. rgb() is only compatible with rgb(), hsla() is only compatible with hsla(), and px is only compatible with px.
 

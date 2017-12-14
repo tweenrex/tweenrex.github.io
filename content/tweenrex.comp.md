@@ -10,11 +10,17 @@ Install the ```@tweenrex/core``` package and import the ```TweenRex``` function.
 import { TweenRex } from '@tweenrex/core'
 ```
 
-## Usage
+Alternatively, add the tweenrex.min.js script and access TweenRex from window.
 
 ```js
+const { TweenRex } = window
+```
+
+## Usage
+
+```javascript
 // get your target
-const target = document.querySelector('#target')
+const target = document.querySelector('.wrex')
 
 // create an observable
 const t1 = TweenRex({
@@ -23,7 +29,7 @@ const t1 = TweenRex({
 
     // subscribe to changes in the offset
     // offset is 0 and 1 representing 0% to 100% of time
-    subscribe(offset) {
+    subscribe: function(offset) {
 
         // tween from 0px to 200px
         target.style.left = (200 * offset) + 'px'
@@ -69,7 +75,7 @@ Subscribes the observer to changes in the value.  The value provided is a number
 
 ```js
 var tween = TweenRex({ duration: 1000 })
-var target = document.querySelector('#target')
+var target = document.querySelector('.wrex')
 var svgRenderer = polymorph.interpolate(['#first path', '#second path'])
 
 tween.subscribe(o => {

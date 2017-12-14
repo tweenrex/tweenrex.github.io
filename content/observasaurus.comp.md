@@ -4,32 +4,41 @@ A simple observable and the base class for [TweenRex](./TweenRex.md) and [Tyrann
 
 ## Getting Started
 
-Install the ```@tweenrex/core``` package and import the ```TRexObservable``` function.
+Install the ```@tweenrex/core``` package and import the ```TRexObservable``` function.  
 
 ```js
 import { TRexObservable } from '@tweenrex/core'
+```
+
+Alternatively, add the tweenrex.min.js script and access TRexObservable from window.
+
+```js
+const { TRexObservable } = window
 ```
 
 ## Usage
 
 Writing your typical foo-bar example
 
-```js
-// get your target
-const obs = TRexObservable({
-    subscribe: o => {
-        // log whatever gets passed to .next()
-        console.log(o)
+```javascript:text-template
+var target = document.querySelector('.wrex')
+target.innerHTML = ''
+
+var obs = TRexObservable({
+    // publish all values, even if repeated
+    distinct: false,
+    subscribe: function(o) {
+        target.innerHTML += o + ' ';
     }
 })
 // loop through foo bar stuff
-for (let i = 1; i < 30; i++) {
-    if (i % 3) {
-        // foo for multiples of 3
+for (var i = 1; i < 10; i++) {
+    if (i % 2) {
+        // foo for multiples of 2
         obs.next('foo')
     }
-    if (i % 5) {
-        // bar for multiples of 5
+    if (i % 3) {
+        // bar for multiples of 3
         obs.next('bar')
     }
 }
@@ -37,18 +46,19 @@ for (let i = 1; i < 30; i++) {
 
 Listening to events
 
-```js
-const observable = TRexObservable({
-    subscribe: evt => {
-        // fires each time mousemove is fired
+```javascript:text-template
+var target = document.querySelector('.wrex')
+var observable = TRexObservable({
+    subscribe: function(evt) {
+        target.innerHTML = 'x: ' +evt.clientX + ' y:' + evt.clientY
     }
 })
 
+// jQuery events
+// $('body').on('mousemove', observable.next)
+
 // native DOM event listener
 document.body.addEventListener('mousemove', observable.next)
-
-// or jQuery events
-$('body').on('mousemove', observable.next)
 ```
 
 ### Options
