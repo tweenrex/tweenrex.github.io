@@ -1,0 +1,77 @@
+[
+  {
+    "meta": {
+      "index": 0,
+      "fileName": "tyrannoscrollus.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2017-12-12",
+    "path": "/tyrannoscrollus",
+    "permalink": "/tyrannoscrollus",
+    "anchors": [],
+    "body": {
+      "relativePath": "./tyrannoscrollus.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 1,
+      "fileName": "tweenrex.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2017-12-14",
+    "path": "/tweenrex",
+    "permalink": "/tweenrex",
+    "anchors": [],
+    "body": {
+      "relativePath": "./tweenrex.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 2,
+      "fileName": "observasaurus.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2017-12-14",
+    "path": "/observasaurus",
+    "permalink": "/observasaurus",
+    "anchors": [],
+    "body": {
+      "relativePath": "./observasaurus.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 3,
+      "fileName": "interpolate.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2017-12-13",
+    "path": "/interpolate",
+    "permalink": "/interpolate",
+    "anchors": [],
+    "body": {
+      "relativePath": "./interpolate.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 4,
+      "fileName": "examples.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2017-12-12",
+    "path": "/examples",
+    "permalink": "/examples",
+    "anchors": [],
+    "body": {
+      "relativePath": "./examples.comp.md"
+    }
+  }
+]

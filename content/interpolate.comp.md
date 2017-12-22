@@ -1,6 +1,6 @@
 # interpolate()
 
-A helper function that makes interpolating between two or more values simple.  It is built to work seamlessly with [TyrannoScrollus](./TyrannoScrollus.md)  and [TweenRex](./TweenRex.md) .
+A helper function that makes interpolating between two or more values simple.  It is built to work seamlessly with [TyrannoScrollus](/tyrannoscrollus)  and [TweenRex](/tweenrex).
 
 ## Getting Started
 

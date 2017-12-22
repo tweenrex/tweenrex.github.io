@@ -1,0 +1,16 @@
+.example {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.example * {
+    position: relative;
+}
+
+h1 {
+    font-family: Arial;
+    font-size: 27pt;
+}

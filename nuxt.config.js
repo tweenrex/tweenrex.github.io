@@ -5,7 +5,8 @@ const config = {}
 
 // configure webpack
 config.build = {
-    extend(config, ctx) {}
+    extend(config, ctx) { },
+    externals: ['tweenrex']
 }
 
 // configure environment variables
@@ -40,7 +41,18 @@ config.head = {
             href: 'https://fonts.googleapis.com/css?family=Oswald:300|Oxygen'
         }
     ],
-    script: [{ src: '/vs/loader.js', async: true }]
+    script: [
+        {
+            src: '/vs/loader.js'
+        },
+        {
+            innerHTML: 'window.amdRequire=window.require'
+        },
+        {
+            src: 'https://unpkg.com/tweenrex/dist/tweenrex-all.min.js'
+        }
+    ],
+    __dangerouslyDisableSanitizers: ['script']
 }
 
 // configure markdown-it plugin

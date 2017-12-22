@@ -6,7 +6,7 @@ if (process.browser) {
     var loaded
     var queue = []
 
-    window.require(['vs/editor/editor.main'], function() {
+    window.amdRequire(['vs/editor/editor.main'], function() {
         monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
             noSemanticValidation: true,
             noSyntaxValidation: false

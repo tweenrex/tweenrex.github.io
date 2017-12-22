@@ -7,15 +7,34 @@
                     <img src="/images/wrex.png" />
                 </a>
             </div>
-            <ul>
-                <li><a href="/observasaurus">TRexObservable</a></li>
-                <li><a href="/tweenrex">TweenRex</a></li>
-                <li><a href="/tyrannoscrollus">TyrannoScrollus</a></li>
-                <li class="divider"></li>
-                <li><a href="/interpolate">interpolate()</a></li>
-                <li class="divider"></li>
-                <li><a href="/examples">examples</a></li>
-            </ul>
+            <div class="nav-section">
+                <ul>
+                    <li><a href="/intro">Intro</a></li>
+                    <li><a href="/setup">Setup</a></li>
+                    <li><a href="/examples">Examples</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-heading">core</div>
+                <ul>
+                    <li><a href="/observasaurus">TRexObservable</a></li>
+                    <li><a href="/tweenrex">TweenRex</a></li>
+                    <li><a href="/tyrannoscrollus">TyrannoScrollus</a></li>
+                </ul>
+            </div>
+             <div class="nav-section">
+                <div class="nav-heading">recurve</div>
+                <ul>
+                    <li><a href="/recurve">easing</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-heading">render</div>
+                <ul>
+                    <li><a href="/interpolate">interpolate</a></li>
+                    <li><a href="/transform">transform</a></li>
+                </ul>
+            </div>
         </div>
     <div class="backdrop"  @click="closeNav()" :class="{ 'visible': isNavOpen }">
         <div class="close-icon">
@@ -94,6 +113,9 @@ $mobile-size: 600px;
     margin: 0;
     width: 200px;
 }
+.nav-section ul {
+    margin: 0;
+}
 .backdrop {
     display: none;
 }
@@ -152,10 +174,10 @@ $mobile-size: 600px;
         display: block;
         padding: 0.6rem 1rem;
         position: fixed;
-        right: .5rem;
+        right: 0.5rem;
         transform: translateX(200%);
         transition: transform 350ms;
-        top: .5rem;
+        top: 0.5rem;
         will-change: transform;
         z-index: 2;
     }
@@ -164,14 +186,25 @@ $mobile-size: 600px;
     }
 }
 
-.nav > ul {
+.nav-heading {
+    border-bottom: solid 2px lightgray;
+    margin-left: 2.8rem;
+    margin-top: 0.7rem;
+    font-weight: bold;
+    font-size: 18pt;
+}
+.nav-section {
+    padding: 0rem 0.8rem;
+}
+
+.nav ul {
     display: flex;
     flex-direction: column;
     list-style-image: none;
     list-style-type: none;
 }
 .nav li {
-    padding: 0.6rem 0.8rem;
+    padding: 0.3rem 0;
 }
 .nav a {
     font-size: 18px;
