@@ -69,11 +69,11 @@ const tween = TweenRex({
 tween.play()
 ```
 
-In this example, ```#target``` slides in from the left by interpolating the ```transform``` property from ```translateX(-200px)``` to ```translateX(0px)```.  ```interpolate``` automatically detects the structure of the values and interpolates between them.
+In this example, ```.wrex``` slides in from the left by interpolating the ```transform``` property from ```translateX(-200px)``` to ```translateX(0px)```.  ```interpolate``` automatically detects the structure of the values and interpolates between them.
 
 > NOTE: ```interpolate``` requires all values to be structurally similar.  That is, all values must be formatted the same with the same units. i.e. rgb() is only compatible with rgb(), hsla() is only compatible with hsla(), and px is only compatible with px.
 
->NOTE: A special interpolate function for SVG/HTML ```transform``` is planned to be built because combining rotate, translate, skew, etc. in a straightforward manner requires special logic outside of the scope of what ```interpolate``` is designed to do.
+> NOTE: You can also accomplish this example by using the 2D [transform](/transform) function
 
 ## Options
 

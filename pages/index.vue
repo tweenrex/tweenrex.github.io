@@ -1,5 +1,8 @@
 <template>
 <div class="page">
+    <div class="hero">
+        <h1>TweenRex</h1>
+    </div>
     <div class="groups">
         <div class="group">
             <div class="shadow"></div>
@@ -28,7 +31,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="btn-bar">
         <a class="btn" href="/intro">Get Started</a>
         <a class="btn" href="/examples">Examples</a>
     </div>
@@ -115,7 +118,7 @@ export default {
                 stagger: 450
             })
 
-            const buttons = select('.btn')
+            const buttons = select('.btn').concat(select('h1'))
             timeline.add(createButtonTweens(buttons), { stagger: 350 })
 
             timeline.play()
@@ -190,19 +193,23 @@ body {
 
 <style lang="scss" scoped>
 h1 {
-    font-size: 18pt;
+    color: black;
     opacity: 0;
-    margin: 0.5em auto;
-
-    svg {
-        display: inline-block;
-        vertical-align: -0.35em;
-        margin: 0 0.25em;
-    }
-
-    a {
-        all: unset;
-    }
+    font-size: 65pt;
+    position: relative;
+    top: -5.5rem;
+}
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    user-select: none;
+    pointer-events: none;
 }
 
 #defs {
@@ -239,6 +246,16 @@ h1 {
     }
 }
 
+.group:nth-child(2) {
+    position: relative;
+    top: 3rem;
+}
+
+.group:nth-child(3) {
+    position: relative;
+    top: 1.5rem;
+}
+
 .shadow {
     position: absolute;
     right: 0;
@@ -264,5 +281,8 @@ h1 {
     opacity: 0;
     padding: 0.5rem 1rem;
     text-decoration: none;
+}
+.btn-bar {
+    margin-top: 2rem;
 }
 </style>

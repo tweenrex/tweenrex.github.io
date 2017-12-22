@@ -1,6 +1,6 @@
 # transform()
 
-A helper function that makes it easy to use rotate, translate, and scale independent of one another.  It is built to work seamlessly with [TyrannoScrollus](/tyrannoscrollus)  and [TweenRex](/tweenrex).
+A helper function that makes it easy to use rotate, translate, and scale independent of one another (2D transform functions).  It is built to work seamlessly with [TyrannoScrollus](/tyrannoscrollus)  and [TweenRex](/tweenrex).
 
 ## Getting Started
 
