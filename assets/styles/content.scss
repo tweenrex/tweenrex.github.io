@@ -1,0 +1,48 @@
+html {
+    font-weight: normal;
+    font-family: 'Oxygen', san-serif;
+    font-size: 14.4px;
+    height: 100%;
+    line-height: 1.65;
+}
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 13.5px;
+    }
+}
+
+body {
+    background: #fcfcfc;
+    color: #444;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    word-wrap: break-word;
+}
+
+p,
+header,
+footer,
+main {
+    padding: 0.6rem 0.8rem;
+}
+
+/* content */
+small {
+    font-size: 0.65em;
+}
+
+abbr {
+    color: gray;
+    -webkit-font-variant: small-caps;
+    -moz-font-variant: small-caps;
+    -ms-font-variant: small-caps;
+    font-variant: small-caps;
+    font-weight: 600;
+    text-transform: lowercase;
+}
+
+abbr[title]:hover {
+    cursor: help;
+}

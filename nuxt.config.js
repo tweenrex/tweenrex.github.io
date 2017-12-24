@@ -5,9 +5,11 @@ const config = {}
 
 // configure webpack
 config.build = {
-    extend(config, ctx) { },
+    extend(config, ctx) {},
     externals: ['tweenrex']
 }
+
+config.css = ['@/assets/styles/base.scss']
 
 // configure environment variables
 config.env = {
@@ -15,11 +17,11 @@ config.env = {
 }
 
 // customize the pre-loader options
-config.loading = { color: '#3B8070' }
+config.loading = false
 
 // configure the head of the document
 config.head = {
-    title: 'test-template',
+    title: 'TweenRex - Reactive Animation Engine',
     meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

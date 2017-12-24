@@ -16,18 +16,7 @@ TweenRex is a set of modular reactive animation libraries that are built to fit 
 
 | Name                                            | Description                                                                                                                                              |
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [TweenRex](/tweenrex)               | Animate over time with complex choregraphy. Includes sub-tweens, full replay controls, seeking, and playback rate controls.                              |
-| [TyrannoScrollus](/tyrannoscrollus) | Sync animations to horizontal or vertical scroll position of elements                                                                                    |
-| [TRexObservable](/observasaurus)   | General Observable for reacting to values over time. BehaviorSubject in RxJs is a close approximation. This is the base class for other types of tweens. |
-
-## Recommended Helper Libraries
-
-TweenRex handles timing and dealing with values over time, but is built to work with other libraries. Here are some recommended helper libraries that match up with TweenRex very well.
-
-| Name                                                       | Type   | Description                                                                                                                                                                                                                                                                                                         |
-| ---------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Flubber](https://github.com/veltman/flubber)              | SVG    | Morph SVG with this heavy-weight library. This library does a great job of morphing between very different shapes at runtime. It cannot handle holes in SVG, but it has a large arsenal of helper functions. It is about 53 KB minified. This is a good choice when smoothness of animation trumps all other needs. |
-| [Path.js](https://github.com/SamKnows/path.js)             | SVG    | Simple SVG morphing library that can tween between two paths with matching SVG commands and the same number of segments. It is about 4KB minified. This library is a good choice when the SVG's are highly optimized for one another.                                                                               |
-| [Polymorph](https://github.com/notoriousb1t/polymorph)     | SVG    | Morph SVG Paths with this lightweight library. It can support variable length paths in addition to handling holes in SVGs. It is just under 6KB minified. It is a good all around choice for performant morphs of highly variable complex paths.                                                                    |
-| [d3-interpolate](https://github.com/d3/d3-interpolate) | Interpolation | Provides a variety of interpolation methods for blending between two values. Values may be numbers, colors, strings, arrays, or even deeply-nested objects. This could easily be used with TweenRex and TyrannoScrollus |
-| [nm8](https://github.com/davidkpiano/nm8) | Tweening | This super small tweening library fits in a tweet! This library is compatible with the render package. If you prefer low-level, this is as low as you can get. |
+| core | Contains [TweenRex](/tweenrex) for duration based animations and timelines, [TyrannoScrollus](/tyrannoscrollus) for scroll-synced animations, and [TRexObservable](/observasaurus) for reactive animations. |
+| debug | Contains debugging tools for visualizing easings and a player control for TweenRex. |
+| recurve | Contains all the [easing](/recurve) functions you will ever need! |
+| render | Contains [interpolate](/interpolate) for interpolating... basically... anything... and [transform](/transform) for interpolating 2D transform types separately (you can even assign different easing for rotation than scale!)  |

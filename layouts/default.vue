@@ -12,6 +12,7 @@
                     <li><a href="/intro">Intro</a></li>
                     <li><a href="/setup">Setup</a></li>
                     <li><a href="/examples">Examples</a></li>
+                    <li><a href="/compatibility">Compatibility</a></li>
                 </ul>
             </div>
             <div class="nav-section">
@@ -73,9 +74,6 @@ export default {
     }
 }
 </script>
-<style lang="scss">
-@import 'assets/styles/base';
-</style>
 
 <style lang="scss" scoped>
 $mobile-size: 600px;

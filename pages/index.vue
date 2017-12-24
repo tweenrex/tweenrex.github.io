@@ -173,7 +173,7 @@ function createDinoTweens(groups) {
 }
 </script>
 
-<style>
+<style lang="scss">
 html {
     height: 100%;
     text-align: center;
@@ -281,6 +281,7 @@ h1 {
     opacity: 0;
     padding: 0.5rem 1rem;
     text-decoration: none;
+    font-size: 20pt;
 }
 .btn-bar {
     margin-top: 2rem;

@@ -1,0 +1,54 @@
+
+code {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe WPC, Segoe UI, HelveticaNeue-Light, Ubuntu, Droid Sans,
+        sans-serif;
+    white-space: pre;
+}
+
+pre {
+    padding: 0.6rem 0.8rem;
+    white-space: pre;
+}
+
+pre > code {
+    word-wrap: normal;
+    white-space: pre-wrap;
+}
+.code-block {
+    background-color: #f8f8f8;
+    box-shadow: inset 0 0 3px #989898;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    position: relative;
+}
+@media screen and (max-width: 600px) {
+    .code-block {
+        overflow: scroll;
+    }
+}
+
+.code-launcher {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #222;
+    transform: scale(1);
+    will-change: transform;
+    transition: transform 250ms;
+    cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+    .code-launcher {
+        display: none;
+    }
+}
+.code-launcher:hover {
+    transform: scale(1.15);
+}
+.code-launcher > svg {
+    width: 24px;
+    height: 24px;
+}
+code.monaco-editor {
+    background-color: transparent;
+}
