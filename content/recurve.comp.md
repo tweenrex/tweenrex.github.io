@@ -12,7 +12,7 @@ import { cubicBezier } from '@tweenrex/recurve'
 
 ## Usage
 
-```javascript
+```js:template/wrex
 const tween = TweenRex({
     duration: 1000,
     subscribe: tweenrex.transform({

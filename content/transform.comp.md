@@ -12,7 +12,7 @@ import { transform } from '@tweenrex/render'
 
 ## Usage
 
-```javascript
+```js:template/wrex
 const tween = TweenRex({
     duration: 1000,
     subscribe: tweenrex.transform({

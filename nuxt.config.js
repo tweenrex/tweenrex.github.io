@@ -9,7 +9,7 @@ config.build = {
     externals: ['tweenrex']
 }
 
-config.css = ['@/assets/styles/base.scss']
+config.css = ['node_modules/prismjs/themes/prism.css', '@/assets/styles/base.scss']
 
 // configure environment variables
 config.env = {
@@ -41,17 +41,22 @@ config.head = {
             rel: 'stylesheet',
             type: 'text/css',
             href: 'https://fonts.googleapis.com/css?family=Oswald:300|Oxygen'
+        },
+        {
+            rel: 'stylesheet',
+            type: 'text/css',
+            href: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.min.css'
         }
     ],
     script: [
         {
-            src: '/vs/loader.js'
-        },
-        {
-            innerHTML: 'window.amdRequire=window.require'
-        },
-        {
             src: 'https://unpkg.com/tweenrex/dist/tweenrex-all.min.js'
+        },
+        {
+            src: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.min.js'
+        },
+        {
+            src: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/mode/javascript/javascript.min.js'
         }
     ],
     __dangerouslyDisableSanitizers: ['script']
@@ -63,15 +68,14 @@ config.markdownit = {
     linkify: true,
     breaks: false,
     html: true,
-    xhtmlOut: true,
-    langPrefix: 'v-code-'
+    xhtmlOut: true
 }
 
 // configure nuxt modules
 config.modules = ['nuxtent']
 
 // configure ./plugin scripts
-config.plugins = ['~/plugins/monaco-configure.js', '~/plugins/highlighter.js']
+config.plugins = ['~/plugins/monaco-configure.js']
 
 // configure router
 config.router = {
@@ -80,5 +84,3 @@ config.router = {
 
 // export final configuration
 module.exports = config
-
-//

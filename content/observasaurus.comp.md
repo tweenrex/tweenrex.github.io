@@ -20,7 +20,7 @@ const { TRexObservable } = window
 
 Writing your typical foo-bar example
 
-```javascript:text-template
+```js:template/text
 var target = document.querySelector('.wrex')
 target.innerHTML = ''
 
@@ -46,7 +46,7 @@ for (var i = 1; i < 10; i++) {
 
 Listening to events
 
-```javascript:text-template
+```js:template/text
 var target = document.querySelector('.wrex')
 var observable = TRexObservable({
     subscribe: function(evt) {

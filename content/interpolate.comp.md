@@ -14,7 +14,7 @@ import { interpolate } from '@tweenrex/render'
 
 ### A Simple Fade Out
 
-```javascript
+```js:template/wrex
 const tween = TweenRex({
     duration: 1000,
     easing: just.curves.easeOut,
@@ -54,7 +54,7 @@ In the example, ```myObject``` is the target of the tween.  ```The timeElapsed``
 
 ### Slide In With a Text Change
 
-```javascript
+```js:template/wrex
 const tween = TweenRex({
     duration: 1000,
     subscribe: tweenrex.interpolate({

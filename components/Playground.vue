@@ -17,7 +17,7 @@
             <div class="playground">
                 <div class="editor-panes">
                     <div class="editor-container">
-                        <div v-show="isLoaded" ref="jsEditor" class="editor"></div>
+                        <div ref="jsEditor" class="editor"></div>
                     </div>
                     <div class="frame-container">
                         <iframe ref="frame"></iframe>
@@ -43,33 +43,9 @@ const component = {
         }
     },
     created() {
-        const self = this
         if (process.browser) {
-            window.addEventListener('resize', self.onResize)
-            window.addEventListener('edit-code', self.onEditCode)
-        }
-    },
-    mounted() {
-        const self = this
-
-        if (process.browser) {
-            const jsEditor = self.$refs.jsEditor
-            self.js = 'var t1 = TweenRex({});'
-            self.isLoaded = true
-
-            window.onMonacoLoad(function(monaco) {
-                self.jsEditor = monaco.editor.create(jsEditor, {
-                    value: self.js,
-                    language: 'javascript',
-                    lineNumbers: true,
-                    roundedSelection: false,
-                    scrollBeyondLastLine: false,
-                    readOnly: false
-                })
-
-                self.onResize()
-                self.onRun()
-            })
+            window.addEventListener('edit-code', this.onEditCode)
+            window.addEventListener('resize', this.onResize)
         }
     },
     destroyed() {
@@ -79,22 +55,48 @@ const component = {
         }
     },
     methods: {
+        setup() {
+            const self = this
+            if (self.isLoaded) {
+                return
+            }
+            self.isLoaded = true
+
+            const jsEditor = self.$refs.jsEditor
+            self.isLoaded = true
+
+            const editor = CodeMirror(
+                elt => {
+                    jsEditor.parentNode.replaceChild(elt, jsEditor)
+                },
+                {
+                    value: self.js,
+                    lineNumbers: true,
+                    mode: 'javascript'
+                }
+            )
+
+            self.jsEditor = editor
+            self.onResize()
+            self.onRun()
+        },
         onCloseModal() {
             this.isShowing = false
         },
         onEditCode(evt) {
             const self = this
             self.isShowing = true
-            self.templateName = evt.detail.templateName
+            self.template = evt.detail.template
+            self.js = evt.detail.code
 
-            const js = (self.js = evt.detail.js)
-            self.jsEditor.setValue(js)
+            self.setup()
+            self.jsEditor.setValue(self.js)
             self.onRun()
         },
         onResize() {
             const self = this
             if (self.jsEditor) {
-                self.jsEditor.layout()
+                self.jsEditor.refresh()
             }
         },
         onRun() {
@@ -163,6 +165,12 @@ function createHTML(contents) {
 export default component
 </script>
 
+<style>
+.CodeMirror {
+    height: 100%;
+}
+</style>
+
 <style lang="scss" scoped>
 .playground {
     height: 100%;
@@ -204,6 +212,7 @@ export default component
     flex-basis: 50%;
     border: 1px solid grey;
     overflow: hidden;
+    position: relative;
 }
 .editor {
     height: 100%;
@@ -227,19 +236,55 @@ export default component
 .placeholder {
     white-space: pre-wrap;
 }
-
 .modal {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-
-    visibility: hidden;
     width: 100%;
     height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    will-change: opacity;
+    transition: opacity 150ms ease-out;
+
+    > .modal-content {
+        will-change: transform;
+        transition: transform 450ms ease-out;
+        transition-delay: 50ms;
+        transform: translateY(-100%);
+    }
+    .play-button {
+        opacity: 0;
+        pointer-events: none;
+        will-change: opacity;
+        transition: opacity 200ms ease-out;
+        transition-delay: 600ms;
+    }
+    .close-button {
+        opacity: 0;
+        pointer-events: none;
+        will-change: opacity;
+        transition: opacity 250ms ease-out;
+        transition-delay: 700ms;
+    }
 }
 .modal.visible {
-    visibility: visible;
+    opacity: 1;
+    pointer-events: inherit;
+
+    > .modal-content {
+        transform: translateY(0);
+    }
+
+    .play-button {
+        opacity: 1;
+        pointer-events: inherit;
+    }
+    .close-button {
+        opacity: 1;
+        pointer-events: inherit;
+    }
 }
 .modal-backdrop {
     position: absolute;

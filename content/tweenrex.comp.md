@@ -18,7 +18,7 @@ const { TweenRex } = window
 
 ## Usage
 
-```javascript
+```js:template/wrex
 // get your target
 const target = document.querySelector('.wrex')
 
