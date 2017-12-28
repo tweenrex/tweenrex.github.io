@@ -17,7 +17,7 @@ import { interpolate } from '@tweenrex/render'
 ```js:template/wrex
 const tween = TweenRex({
     duration: 1000,
-    easing: just.curves.easeOut,
+    easing: tweenrex.easing.back.out,
     subscribe: tweenrex.interpolate({
         targets: '.wrex',
         opacity: 0
@@ -27,7 +27,7 @@ const tween = TweenRex({
 tween.play()
 ```
 
-```#target``` is resolved to an element in the DOM.  Because ```opacity``` is a simple value (and not an array), the starting value of 1 is taken from the target and the value of 0 is used as the ending value. ```interpolate``` has special logic for HTMLElements that allow it to automatically decide if properties are attributes like ```disabled```, style properties like ```opacity```, or regular object properties such as ```innerHTML```.  In this example we included an easing from the just-curves easing library to make the animation look better.
+```#target``` is resolved to an element in the DOM.  Because ```opacity``` is a simple value (and not an array), the starting value of 1 is taken from the target and the value of 0 is used as the ending value. ```interpolate``` has special logic for HTMLElements that allow it to automatically decide if properties are attributes like ```disabled```, style properties like ```opacity```, or regular object properties such as ```innerHTML```.  In this example we included an easing to make the animation look better.
 
 ### Updating a Timer
 
@@ -61,7 +61,7 @@ const tween = TweenRex({
         targets: '.wrex',
         transform: {
             value: ['translateX(-200px)', 'translateX(0px)'],
-            easing: just.curves.easeIn
+            easing: tweenrex.easing.quad.out
         }
     })
 })

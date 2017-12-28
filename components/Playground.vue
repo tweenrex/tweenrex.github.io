@@ -1,26 +1,20 @@
 <template>
 <div>
     <div :class="{ visible: isShowing }" class="modal">
-        <div @click="onCloseModal()" class="close-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M24 3.752l-4.423-3.752-7.771 9.039-7.647-9.008-4.159 4.278c2.285 2.885 5.284 5.903 8.362 8.708l-8.165 9.447 1.343 1.487c1.978-1.335 5.981-4.373 10.205-7.958 4.304 3.67 8.306 6.663 10.229 8.006l1.449-1.278-8.254-9.724c3.287-2.973 6.584-6.354 8.831-9.245z"/>
-            </svg>
-        </div>
-        <div class="play-button">
-            <div @click="onRun()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="-3 0 24 24">
-                    <path d="M3 22v-20l18 10-18 10z"/>
-                </svg>
-            </div>
-        </div>
         <div class="modal-content">
             <div class="playground">
-                <div class="editor-panes">
-                    <div class="editor-container">
-                        <div ref="jsEditor" class="editor"></div>
+                <div class="editor-wrapper">
+                    <div class="editor-tools">
+                        <button @click="onRun()">Run</button>
+                        <button @click="onCloseModal()">Close</button>
                     </div>
-                    <div class="frame-container">
-                        <iframe ref="frame"></iframe>
+                    <div class="editor-panes">
+                        <div class="editor-container">
+                            <div ref="jsEditor" class="editor"></div>
+                        </div>
+                        <div class="frame-container">
+                            <iframe ref="frame"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -31,12 +25,22 @@
 </template>
 
 <script>
-const component = {
+import { loadScript, loadStyle } from '../assets/utilities/loader'
+const cmScript = 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.min.js'
+const cmJavaScript = 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/mode/javascript/javascript.min.js'
+
+const styles = [
+    'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/theme/material.min.css'
+]
+
+export default {
     data() {
         return {
             content: 'Some content',
             selectedTab: 'js',
             js: '',
+            htmlTemplate: '',
             jsEditor: undefined,
             isLoaded: false,
             isShowing: false
@@ -55,30 +59,34 @@ const component = {
         }
     },
     methods: {
-        setup() {
+        setup(fn) {
             const self = this
-            if (self.isLoaded) {
-                return
-            }
             self.isLoaded = true
 
-            const jsEditor = self.$refs.jsEditor
-            self.isLoaded = true
+            // load styles
+            styles.forEach(loadStyle)
 
-            const editor = CodeMirror(
-                elt => {
-                    jsEditor.parentNode.replaceChild(elt, jsEditor)
-                },
-                {
-                    value: self.js,
-                    lineNumbers: true,
-                    mode: 'javascript'
-                }
-            )
+            // load scripts in order and then create code editor
+            loadScript(cmScript, () => {
+                loadScript(cmJavaScript, () => {
+                    const jsEditor = self.$refs.jsEditor
+                    const editor = CodeMirror(
+                        elt => {
+                            jsEditor.parentNode.replaceChild(elt, jsEditor)
+                        },
+                        {
+                            value: self.js,
+                            lineNumbers: true,
+                            mode: 'javascript',
+                            theme: 'material'
+                        }
+                    )
 
-            self.jsEditor = editor
-            self.onResize()
-            self.onRun()
+                    self.jsEditor = editor
+                    self.onResize()
+                    self.onRun()
+                })
+            })
         },
         onCloseModal() {
             this.isShowing = false
@@ -86,12 +94,15 @@ const component = {
         onEditCode(evt) {
             const self = this
             self.isShowing = true
-            self.template = evt.detail.template
+            self.htmlTemplate = evt.detail.template
             self.js = evt.detail.code
 
-            self.setup()
-            self.jsEditor.setValue(self.js)
-            self.onRun()
+            if (self.isLoaded) {
+                self.jsEditor.setValue(self.js)
+                self.onRun()
+            } else {
+                self.setup()
+            }
         },
         onResize() {
             const self = this
@@ -101,20 +112,7 @@ const component = {
         },
         onRun() {
             const self = this
-            const htmlTemplate =
-                self.templateName === 'text-template'
-                    ? '<img class="wrex" width="200" height="200" src="images/wrex.png" />'
-                    : '<h1 class="wrex">TweenRex</h1>'
-
-            const html = createHTML([
-                createStyle('/example.css'),
-                createScript('https://unpkg.com/tweenrex/dist/tweenrex-all.min.js'),
-                createScript('https://unpkg.com/just-curves/dist/just-curves.min.js'),
-                createScript('https://unpkg.com/polymorph-js/dist/polymorph.min.js'),
-                createScript(insertContent(htmlTemplate), true),
-                createScript(self.jsEditor.getValue(), true)
-            ])
-
+            const html = self.htmlTemplate.replace('$contents', self.jsEditor.getValue())
             const frame = self.$refs.frame
             const doc = frame.contentWindow.document
             doc.open()
@@ -123,70 +121,17 @@ const component = {
         }
     }
 }
-
-function createStyle(href) {
-    return `<link rel="stylesheet" href="${href}" />`
-}
-
-function insertContent(contents) {
-    return (
-        `var el = document.createElement('div');` +
-        `el.innerHTML = '` +
-        contents +
-        `';` +
-        `document.body.appendChild(el);`
-    )
-}
-
-function onLoad(script) {
-    return `;window.addEventListener('load', function() { ` + script + `});`
-}
-
-function createScript(srcOrContents, contents) {
-    return (
-        '<script' +
-        (contents ? '' : ' src="' + srcOrContents + '"') +
-        '>' +
-        (contents ? onLoad(srcOrContents) : '') +
-        '</sc' +
-        'ript>'
-    )
-}
-
-function createHTML(contents) {
-    return `
-<html>
-<head>${contents.join('')}</head>
-<body class="example"></body>
-</html>
-`
-}
-
-export default component
 </script>
 
 <style>
 .CodeMirror {
-    height: 100%;
+    height: 100% !important;
 }
 </style>
 
 <style lang="scss" scoped>
 .playground {
     height: 100%;
-}
-.close-button {
-    cursor: pointer;
-    position: absolute;
-    z-index: 9001;
-    top: 1.8rem;
-    right: 1.8rem;
-    will-change: transform;
-    transform: scale(1);
-    transition: transform 350ms;
-}
-.close-button:hover {
-    transform: scale(1.2);
 }
 .play-button {
     position: absolute;
@@ -200,12 +145,6 @@ export default component
     cursor: pointer;
     width: 75px;
 }
-.editor-panes {
-    display: flex;
-    width: 100%;
-    position: relative;
-    height: 100%;
-}
 
 .editor-container {
     width: 100%;
@@ -214,11 +153,32 @@ export default component
     overflow: hidden;
     position: relative;
 }
+.editor-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.editor-tools {
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.editor-panes {
+    flex-basis: auto;
+    flex-shrink: 1;
+    flex-grow: 1;
+    display: flex;
+    width: 100%;
+    position: relative;
+    height: 100%;
+}
 .editor {
     height: 100%;
     width: 100%;
 }
 .frame-container {
+    background-color: white;
     width: 100%;
     flex-basis: 50%;
     overflow: hidden;
@@ -261,13 +221,6 @@ export default component
         transition: opacity 200ms ease-out;
         transition-delay: 600ms;
     }
-    .close-button {
-        opacity: 0;
-        pointer-events: none;
-        will-change: opacity;
-        transition: opacity 250ms ease-out;
-        transition-delay: 700ms;
-    }
 }
 .modal.visible {
     opacity: 1;
@@ -275,15 +228,6 @@ export default component
 
     > .modal-content {
         transform: translateY(0);
-    }
-
-    .play-button {
-        opacity: 1;
-        pointer-events: inherit;
-    }
-    .close-button {
-        opacity: 1;
-        pointer-events: inherit;
     }
 }
 .modal-backdrop {
@@ -295,7 +239,7 @@ export default component
 }
 .modal-content {
     align-items: center;
-    background-color: #fbfbfb;
+    background-color: #f2f2f2;
     border-radius: 5px;
     bottom: 1.6rem;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

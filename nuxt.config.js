@@ -41,22 +41,11 @@ config.head = {
             rel: 'stylesheet',
             type: 'text/css',
             href: 'https://fonts.googleapis.com/css?family=Oswald:300|Oxygen'
-        },
-        {
-            rel: 'stylesheet',
-            type: 'text/css',
-            href: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.min.css'
         }
     ],
     script: [
         {
             src: 'https://unpkg.com/tweenrex/dist/tweenrex-all.min.js'
-        },
-        {
-            src: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.min.js'
-        },
-        {
-            src: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/mode/javascript/javascript.min.js'
         }
     ],
     __dangerouslyDisableSanitizers: ['script']
@@ -75,7 +64,7 @@ config.markdownit = {
 config.modules = ['nuxtent']
 
 // configure ./plugin scripts
-config.plugins = ['~/plugins/monaco-configure.js']
+config.plugins = ['~/plugins/code-edit.js']
 
 // configure router
 config.router = {
