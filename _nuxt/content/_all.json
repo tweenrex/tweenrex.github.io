@@ -1,0 +1,153 @@
+[
+  {
+    "meta": {
+      "index": 0,
+      "fileName": "tyrannoscrollus.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/tyrannoscrollus",
+    "permalink": "/tyrannoscrollus",
+    "anchors": [],
+    "body": {
+      "relativePath": "./tyrannoscrollus.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 1,
+      "fileName": "tweenrex.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/tweenrex",
+    "permalink": "/tweenrex",
+    "anchors": [],
+    "body": {
+      "relativePath": "./tweenrex.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 2,
+      "fileName": "transform.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/transform",
+    "permalink": "/transform",
+    "anchors": [],
+    "body": {
+      "relativePath": "./transform.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 3,
+      "fileName": "setup.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/setup",
+    "permalink": "/setup",
+    "anchors": [],
+    "body": {
+      "relativePath": "./setup.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 4,
+      "fileName": "recurve.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/recurve",
+    "permalink": "/recurve",
+    "anchors": [],
+    "body": {
+      "relativePath": "./recurve.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 5,
+      "fileName": "observasaurus.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/observasaurus",
+    "permalink": "/observasaurus",
+    "anchors": [],
+    "body": {
+      "relativePath": "./observasaurus.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 6,
+      "fileName": "intro.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/intro",
+    "permalink": "/intro",
+    "anchors": [],
+    "body": {
+      "relativePath": "./intro.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 7,
+      "fileName": "interpolate.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/interpolate",
+    "permalink": "/interpolate",
+    "anchors": [],
+    "body": {
+      "relativePath": "./interpolate.comp.md"
+    }
+  },
+  {
+    "meta": {
+      "index": 8,
+      "fileName": "examples.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/examples",
+    "permalink": "/examples",
+    "anchors": [],
+    "body": {
+      "relativePath": "./examples.comp.md"
+    }
+  },
+  {
+    "title": "Compatibility - TweenRex",
+    "meta": {
+      "index": 9,
+      "fileName": "compatibility.comp.md",
+      "section": "/",
+      "dirName": "/"
+    },
+    "date": "2018-01-31",
+    "path": "/compatibility",
+    "permalink": "/compatibility",
+    "anchors": [],
+    "body": {
+      "relativePath": "./compatibility.comp.md"
+    }
+  }
+]
